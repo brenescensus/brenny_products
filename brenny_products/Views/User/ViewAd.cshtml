@@ -1,0 +1,77 @@
+﻿@inject IHttpContextAccessor ses;
+
+@model brenny_products.Models.ViewAdModel
+@{
+    ViewData["Title"] = "ViewAd";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>ViewAd</h1>
+<div class="col-lg-3 col-sm-12 col-md-3 mt-3"></div>
+    <div class="card-header"><h3 class="text-success fw-bold text-center">Product Description</h3></div>
+       <div class="card">
+           <div class="card-body"> 
+               <table class="table">
+                   <tr>
+                       <td>
+                           <div class="m-4 border-2 d-inline-flex w-75 " style="border-radius:24px; margin-left:20px:">
+                               <img src="@Url.Content(Model.Pro_Image)" class="card-img-top" height="230" />
+                           </div>
+                       </td>
+                       <td>
+                           <table class="table-striped w-75">
+                               <tr>
+                                   <td <i class="fa fa-user text-danger"></i> Name:</td>
+                                   <td class="text-muted">@Model.Pro_name</td>
+                               </tr>
+                               <tr>
+                                   <td <i class="fa fa-user text-danger"></i> Price:</td>
+                                   <td class="text-muted">@Model.Pro_Price</td>
+                               </tr>
+                               <tr>
+                                   <td <i class="fa fa-user text-danger"></i> Information:</td>
+                                   <td class="text-muted">@Model.Pro_Description</td>
+                               </tr>
+                        <tr>
+                            <td <i class="fa fa-user text-danger"></i> Category:</td>
+                            <td class="text-muted">@Model.Cat_name</td>
+                        </tr>
+                        <tr>
+                            <td <i class="fa fa-user text-danger"></i> Posted By:</td>
+                            <td class="text-muted">@Model.U_name</td>
+                        </tr>
+                        <tr>
+                            <td <i class="fa fa-user text-danger"></i> Contact:</td>
+                            <td class="text-muted">@Model.U_contact</td>
+                        </tr>
+                        <tr>
+                            <td  colspan="2">
+                                <div class="m-4 d-inline-flex w-25" style="border-radius:24px; margin-left:2px">
+                            <img src="@Url.Content(Model.U_image)" class="card-img-top" width="150" height="100" />
+                                </div>
+                            </td>
+
+                        </tr>
+                           </table>
+                       </td>
+                   </tr>
+               </table>
+           </div>
+           <div class="card-header bg-light">
+               <table>
+                   <tr>
+                       <td>
+                    @if (Convert.ToInt32(ses.HttpContext.Session.GetString("UserId"))== Convert.ToInt32(Model.Pro_userid))
+                    {
+                               @Html.ActionLink("Delete Ad","DeleteAd",new{id=Model.Pro_Id},new {@class="btn btn-danger"})
+                           }
+                       </td>
+                       <td>
+                    @Html.ActionLink("Close Ad","Index",new {@class="btn btn-danger"})
+
+                       </td>
+                   </tr>
+               </table>
+           </div>
+       </div>
+

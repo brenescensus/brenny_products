@@ -1,0 +1,35 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model X.PagedList.PagedList<brenny_products.Models.Product>
+@{
+    Layout = "/Views/Shared/_UserLayout.cshtml";
+}
+
+
+
+@if (Model != null)
+{
+    foreach (var items in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-12">
+
+            <div class="card m-4 border-0 d-inline-flex" style="width: 18rem; border-radius:24px:margin-left:20px">
+                <img src="@Url.Content(items.Image)" class="card-img-top" alt="..."/>
+                <div class="card-body">
+                    <h4 class="card-text text-center text-danger fw-bold">@Html.ActionLink(items.Name,"ViewAd",new{id=items.ProductId},new {@class="text-danger text-center fw-bold text-decoration-none"})</h4>
+                    <span class="text-muted text-center">@items.Description<span class="badge bg-danger w-25 text-center">@items.User.Name shop</span></span> <span> <i class="fade fa-cedi-sign"></i>@items.Price</span>
+                </div>
+            </div>
+
+        </div>
+    }
+}
+
+        <div class="center">
+            @Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page}))
+            M          @* Page@(Model.PageCount<Model.PageNumber?0:Model.PageNumber)
+    of@Model.PageCount@Html.PagedListPager(Model.page=>Url.Action("ViewCategory",new {page}))*@
+        </div>
+
+
+        

@@ -1,0 +1,31 @@
+﻿@model brenny_products.Models.Category
+@{
+    ViewData["Title"] = "Add Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CreateCategory</h1>
+@using (Html.BeginForm( "CreateCategory", "Admin", FormMethod.Post, new {@enctype = "multipart/form-data" }))
+{
+<div class="row">
+    <div class="col-md-4"></div>
+        <div class="col-md-4 mb-5">
+            <span class="display-6 fw-bold text-danger text-center mb-5">AddCategory</span>
+        <span class="text-bg-danger">@ViewBag.error</span>
+        <div class="input-group-text mt-2">
+            <div class="input-group-text"><i class="fa fa user"></i></div>
+            @Html.TextBoxFor(x=>x.Name,new {@class="form-control",@placeholder="Category Name"})
+            @Html.ValidationMessageFor(x=>x.Name,"*",new {@class="text-danger"})
+        </div>
+        <div class="input-group mt-1">
+            <div class="input-group-text"><i class="fa fa-image"></i></div>
+            <input type="file" id="imgfile" name="imgfiles " class="form-control" required="required"/>
+        </div>
+        <div class="input-group mt-2">
+            <input type="submit" class="btn btn-success w-100 " value="Add"/>
+        </div>
+        </div>
+        <div class="col-md-4 "></div>
+
+</div>
+}

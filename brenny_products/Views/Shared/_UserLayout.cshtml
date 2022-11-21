@@ -1,0 +1,92 @@
+﻿@inject IHttpContextAccessor ses;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - brenny_products</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/brenny_products.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="https://media.istockphoto.com/id/1408777433/photo/gold-letter-h.jpg?b=1&s=170667a&w=0&k=20&c=uWSSrC-2Zxh9ERfHiWXArhH-b6UL8odrccasGj7aaEQ=" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    Brenny
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (ses.HttpContext.Session.GetString("UserId") == null)
+                            {
+                                Html.ActionLink("Home", "Index", "User", null, new { @class = "nav-link" });
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Category","ViewCategory","User",null,new{@class="nav-link"});
+
+                        </li>
+                        <li class="nav-item">
+                            @if (ses.HttpContext.Session.GetString("UserId") != null)
+                            {
+
+                                @Html.ActionLink("PostAd", "CreateAd", "User", null, new { @class = "nav-link" })
+                                ;
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (ses.HttpContext.Session.GetString("UserId") == null)
+                            {
+                                Html.ActionLink("Sign In", "Login", "User", null, new { @class = "nav-link" });
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (ses.HttpContext.Session.GetString("UserId") != null)
+                            {
+
+                                @Html.ActionLink("Sign Out", "SignOut", "User", null, new { @class = "nav-link" })
+                                ;
+                            }
+                        </li>
+
+                    </ul>
+                    @using (@Html.BeginForm("Ads", "User"))
+                    {
+                        <div class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - brenny_products - <a asp-area="" asp-controller="User" asp-action="Index">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

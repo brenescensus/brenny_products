@@ -1,0 +1,57 @@
+﻿@model brenny_products.Models.User
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>Login</h1>
+@using (Html.BeginForm("Login", "User"))
+
+{
+
+    <span style="font-weight:bolder; font-size:16px; color:red;">@ViewBag.Message</span>
+
+    <div>
+
+        <h2>User Login</h2>
+
+        <div class="row">
+
+            <div class="form-group col-md-4 center">
+
+                <lable for="Email">Email</lable>
+
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control",@placeholder="Username" })
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="form-group col-12">
+
+                <lable for="Password">Password</lable>
+
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" ,@placeholder="Password"})
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="form-group col-12">
+
+                <button class="btn btn-primary " type="submit">Login</button>
+
+            </div>
+            <br>
+            @Html.ActionLink("Sign Up","SignUp")
+
+        </div>
+
+    </div>
+
+}
+

@@ -1,0 +1,46 @@
+﻿@model brenny_products.Models.User;
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>SignUp</h1>
+@using (Html.BeginForm("SignUp","User",FormMethod.Post, new{ enctype="multipart/form-data"})){
+    <div class="row">
+        <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <span classclass="display-6 fw-bold text-danger text-center mb-5>Sign Up</span>
+@Html.ValidationSummary("Fix this errors", new{ @class="text-danger"})
+                    <span class="text-danger"> @ViewBag.error</span>
+                    <div class="input-group mt-2">
+               <div class="input-group-text"><i class="fa fa-user"></i></div>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control",@placeholder="Fullname" })
+                        </div>
+            <div class="input-group mt-2">
+                <div class="input-group-text"><i class="fa fa-user"></i></div>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control",@placeholder="Email" })
+            </div>
+            <div class="input-group mt-2">
+                <div class="input-group-text"><i class="fa fa-user"></i></div>
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control",@placeholder="Password" })
+            </div>
+            <div class="input-group mt-1">
+                <div class="input-group-text"><i class="fa fa-image"></i></div>
+                <input type="file" id="imgfile" name="imgfile" class="form-control" required="required" />
+            </div>
+            <div class="input-group mt-2">
+                <div class="input-group-text"><i class="fa fa-phon"></i></div>
+                @Html.TextBoxFor(m => m.Contact, new { @class = "form-control",@placeholder="Contact" })
+            </div>
+            <div class="input-group mt-2">
+                <button class=" btn btn-success" type="submit" value="Sign Up">Sign Up </button>
+                    </div>
+                    <br>
+                    @Html.ActionLink("Login","Login")
+
+                </div>
+
+
+    </div>
+}
+
